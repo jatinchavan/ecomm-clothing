@@ -35,9 +35,7 @@ class App extends Component {
                             ...snapShot.data()
                         }
                     })
-                });
-                console.log(this.state);
-                
+                });                
             } 
             else { //if user logs out, userAuth is null
                 this.setState({currentUser: userAuth})
