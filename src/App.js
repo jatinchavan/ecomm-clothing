@@ -8,15 +8,17 @@ import HomePage from './pages/homepage/HomePage';
 
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 import {Component} from 'react';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.action';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-        this.state = {
-            currentUser: null
-        }
-    }
+    //     this.state = {
+    //         currentUser: null
+    //     }
+    // }
 
     unsubscribeFromAuth = null;
 
@@ -29,16 +31,14 @@ class App extends Component {
                 // used onSnapshot just so that we get all the data related to that user and
                 // store in state
                 userRef.onSnapshot(snapShot => {
-                    this.setState({
-                        currentUser: {
+                    this.props.setCurrentUser({
                             id: snapShot.id,
                             ...snapShot.data()
-                        }
-                    })
+                        });
                 });                
             } 
             else { //if user logs out, userAuth is null
-                this.setState({currentUser: userAuth})
+                this.props.setCurrentUser(userAuth);
             }
         });
     }
@@ -52,7 +52,7 @@ class App extends Component {
 
         return (
             <div>
-                <Header currentUser={this.state.currentUser}/>
+                <Header/>
                 <Switch>
                     <Route exact path="/" component={HomePage}/>
                     <Route exact path='/shop' component={ShopPage}/>
@@ -64,4 +64,7 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+export default connect(null, mapDispatchToProps)(App);
