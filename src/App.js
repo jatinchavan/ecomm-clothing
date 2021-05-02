@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import ShopPage from './pages/shop/Shop';
 import Header from './components/header/Header';
 import SignInAndSignUp from './pages/signIn-signUp/SignIn-SignUp';
@@ -8,17 +8,10 @@ import HomePage from './pages/homepage/HomePage';
 
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 import {Component} from 'react';
-import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user.action';
+import {connect} from 'react-redux';
+import {UserActionTypes} from './redux/user/user.types';
 
 class App extends Component {
-    // constructor(props) {
-    //     super(props);
-
-    //     this.state = {
-    //         currentUser: null
-    //     }
-    // }
 
     unsubscribeFromAuth = null;
 
@@ -28,16 +21,17 @@ class App extends Component {
             if (userAuth) { //when user logs in, create document if doesn't exist in createUserProfileDocument and listen to any changes on userRef using onSnapShot
                 const userRef = await createUserProfileDocument(userAuth);
 
-                // used onSnapshot just so that we get all the data related to that user and
-                // store in state
+                // used onSnapshot just so that we get all the data related to that user and store in state
+                // 1
                 userRef.onSnapshot(snapShot => {
                     this.props.setCurrentUser({
                             id: snapShot.id,
                             ...snapShot.data()
                         });
-                });                
-            } 
-            else { //if user logs out, userAuth is null
+                });
+            } else {
+                // if user logs out, userAuth is null this.props.setCurrentUser calls the
+                // dispatch function in mapDispatchToProps()
                 this.props.setCurrentUser(userAuth);
             }
         });
@@ -48,23 +42,36 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state);
-
         return (
             <div>
                 <Header/>
                 <Switch>
                     <Route exact path="/" component={HomePage}/>
                     <Route exact path='/shop' component={ShopPage}/>
-                    <Route exact path='/signin' component={SignInAndSignUp}/>
+                    <Route
+                        exact
+                        path='/signin'
+                        render={() => this.props.currentUser // 5
+                        ? (<Redirect to='/'/>)
+                        : (<SignInAndSignUp/>)}/>
                 </Switch>
-
             </div>
         );
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    setCurrentUser: user => dispatch(setCurrentUser(user))
-})
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = (state) => {
+    // 4
+    return {currentUser: state.user.currentUser}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        // 2 (3 in user-reducer)
+        setCurrentUser: user => {
+            dispatch({type: UserActionTypes.SET_CURRENT_USER, payload: user})
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
