@@ -4,6 +4,7 @@ import './MiniCartDropDown.styless.scss';
 import CustomButton from '../custom-button/CustomButton';
 import { connect } from 'react-redux';
 import CartItem from '../cart-item/CartItem';
+import { selectCartItems } from '../../redux/cart/cart.selectors';
 
 const MiniCartDropDown = ({ cartItems }) => (
     <div className='cart-dropdown'>
@@ -16,8 +17,10 @@ const MiniCartDropDown = ({ cartItems }) => (
     </div>
 )
 
+
 const mapStateToProps = state => ({
-    cartItems : state.cart.cartItems
+    // cartItems : state.cart.cartItems
+    cartItems : selectCartItems(state)
 });
 
 export default connect(mapStateToProps)(MiniCartDropDown);
