@@ -17,6 +17,19 @@ const addItemToCart = (currentCartItems, newItem) => {
 
     // if new item, add it quantity set as 1
     return [...currentCartItems, { ...newItem, quantity: 1 }];
+};
+
+const removeItem = (currentCartItems, itemToRemove) => {
+    const existingItemIndex = currentCartItems.findIndex(item => item.id === itemToRemove.id);
+
+    // if only one quantity present for that item in cart/checkout then remove
+    if (currentCartItems[existingItemIndex].quantity === 1) {
+        return currentCartItems.filter(item => item.id !== itemToRemove.id);
+    }
+
+    const modifiedCartItems = [...currentCartItems];
+    modifiedCartItems[existingItemIndex].quantity --;
+    return modifiedCartItems;
 }
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -32,6 +45,19 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: addItemToCart(state.cartItems, action.payload)
             };
+        
+        case CartActionTypes.REMOVE_ITEM:
+            return {
+                ...state,
+                cartItems: removeItem(state.cartItems, action.payload)
+            }
+
+        case CartActionTypes.CLEAR_ITEM_FROM_CART:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter(item => item.id !== action.removeID) // does not return the item that we need to remove
+            }
+        
 
         default:
             return state;

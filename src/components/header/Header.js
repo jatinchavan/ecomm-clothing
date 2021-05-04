@@ -6,8 +6,8 @@ import {auth} from '../../firebase/firebase.utils';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import MiniCartIcon from '../mini-cart-icon/MiniCart-icon';
-import MiniCartDropDown from '../mini-cart-dropdown/MiniCartDropDown';
+import CartIcon from '../cart-icon/Cart-icon';
+import CartDropDown from '../cart-dropdown/CartDropDown';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 
@@ -26,9 +26,9 @@ const Header = ({currentUser, HiddenMiniCart}) => (
                 : 
                 <Link className='options' to='/signin'> SIGN IN </Link>
             }
-            <MiniCartIcon />
+            <CartIcon />
         </div>
-        {HiddenMiniCart ? null : <MiniCartDropDown />}
+        {HiddenMiniCart ? null : <CartDropDown />}
     </div>
 );
 
@@ -36,7 +36,7 @@ const Header = ({currentUser, HiddenMiniCart}) => (
 
 const mapStatesToProp = (state) => {
     return {
-        // state.user and state.cart are the reducers slice defined in index.js 
+        // used selectors with Reselect
         currentUser: selectCurrentUser(state),
         HiddenMiniCart : selectCartHidden(state)
     }
