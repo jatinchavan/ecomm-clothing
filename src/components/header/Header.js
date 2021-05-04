@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import MiniCartIcon from '../mini-cart-icon/MiniCart-icon';
 import MiniCartDropDown from '../mini-cart-dropdown/MiniCartDropDown';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
 //{currentUser} = props.currentUser
 const Header = ({currentUser, HiddenMiniCart}) => (
@@ -30,11 +32,13 @@ const Header = ({currentUser, HiddenMiniCart}) => (
     </div>
 );
 
+
+
 const mapStatesToProp = (state) => {
     return {
         // state.user and state.cart are the reducers slice defined in index.js 
-        currentUser: state.user.currentUser,
-        HiddenMiniCart : state.cart.hidden
+        currentUser: selectCurrentUser(state),
+        HiddenMiniCart : selectCartHidden(state)
     }
 };
 

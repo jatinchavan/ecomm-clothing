@@ -5,22 +5,29 @@ import CustomButton from '../custom-button/CustomButton';
 import { connect } from 'react-redux';
 import CartItem from '../cart-item/CartItem';
 import { selectCartItems } from '../../redux/cart/cart.selectors';
+import { withRouter } from 'react-router-dom';
+import { CartActionTypes } from '../../redux/cart/cart.types';
 
-const MiniCartDropDown = ({ cartItems }) => (
+const MiniCartDropDown = ({ cartItems, history, dispatch }) => (
     <div className='cart-dropdown'>
         <div className='cart-items' >
            {
-            cartItems.map(item => <CartItem key={item.id} item={item} />)
+               cartItems.length ?
+                cartItems.map(item => <CartItem key={item.id} item={item} />) :
+                <span className='empty-message'>Your cart is empty</span>
            }
         </div>
-        <CustomButton>GO TO CHECKOUT</CustomButton>
+        <CustomButton onClick={() => {
+                history.push('/checkout');
+                dispatch({type: CartActionTypes.TOGGLE_MINI_CART});
+            }}>GO TO CHECKOUT</CustomButton>
     </div>
 )
 
 
 const mapStateToProps = state => ({
     // cartItems : state.cart.cartItems
-    cartItems : selectCartItems(state)
+    cartItems : selectCartItems(state) //using selector
 });
 
-export default connect(mapStateToProps)(MiniCartDropDown);
+export default withRouter(connect(mapStateToProps)(MiniCartDropDown));
