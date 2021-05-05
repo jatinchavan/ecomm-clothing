@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { CartActionTypes } from '../../redux/cart/cart.types';
 
 
-// Displays each individual collection item
+// Displays each individual collection item on Collection Overview
 const CollectonItem = ({item, addItem}) => (
     <div className='collection-item'>
         <div 

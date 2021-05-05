@@ -11,6 +11,7 @@ import {Component} from 'react';
 import {connect} from 'react-redux';
 import {UserActionTypes} from './redux/user/user.types';
 import Checkout from './pages/checkout/Checkout';
+import Collection from './pages/collection/Collection';
 
 class App extends Component {
 
@@ -48,14 +49,12 @@ class App extends Component {
                 <Header/>
                 <Switch>
                     <Route exact path="/" component={HomePage}/>
-                    <Route exact path='/shop' component={ShopPage}/>
-                    <Route
-                        exact
-                        path='/signin'
-                        render={() => this.props.currentUser // 5
+                    <Route exact path='/shop' component={ ShopPage }/>
+                    <Route exact path='/signin' render={() => this.props.currentUser // 5
                         ? (<Redirect to='/'/>)
                         : (<SignInAndSignUp/>)}/>
                     <Route exact path='/checkout' component={Checkout}/>
+                    <Route path='/shop/:collectionId' component={Collection}/>
                 </Switch>
             </div>
         );
