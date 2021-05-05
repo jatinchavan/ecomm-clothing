@@ -19,7 +19,7 @@ const CartDropDown = ({ cartItems, history, dispatch }) => (
         </div>
         <CustomButton onClick={() => {
                 history.push('/checkout');
-                dispatch({type: CartActionTypes.TOGGLE_MINI_CART});
+                dispatch({type: CartActionTypes.TOGGLE_MINI_CART}); //shorthand for dispatch, need not declare mapDispatchToProps()
             }}>GO TO CHECKOUT</CustomButton>
     </div>
 )

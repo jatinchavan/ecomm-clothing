@@ -4,26 +4,37 @@ import {BrowserRouter} from 'react-router-dom';
 
 import './index.css';
 import App from './App';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
 import userReducer from './redux/user/user.reducer';
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import logger from "redux-logger";
 import cartReducer from './redux/cart/cart.reducer';
+import {persistStore, persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import {PersistGate} from 'redux-persist/integration/react';
 
-const rootReducer = combineReducers({
-    user: userReducer,
-    cart: cartReducer
-});
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['cart']
+};
+const rootReducer = combineReducers({user: userReducer, cart: cartReducer});
+// persistedReducer - Root reducer with persistance capabilities
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middleWares = [logger];
 
-const store = createStore(rootReducer, applyMiddleware(...middleWares));
+const store = createStore(persistedReducer, applyMiddleware(...middleWares));
+const persistor = persistStore(store);
 
 ReactDOM.render(
     <Provider store={store}>
     <BrowserRouter>
-    <React.StrictMode>
-        <App/>
-    </React.StrictMode>
-</BrowserRouter> </Provider>, document.getElementById('root'));
+        <PersistGate persistor={persistor}>
+            <React.StrictMode>
+                <App/>
+            </React.StrictMode>
+        </PersistGate>
+    </BrowserRouter>
+</Provider>, document.getElementById('root'));
