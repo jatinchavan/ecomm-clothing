@@ -1,6 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import './homepage-menuitems.styles.scss';
+import './homepage-menu-item.styles.scss';
 
 // This is the each indivisual menu item we see on UI
 const MenuItem = ({title, imageUrl, size, history, linkUrl, match}) => (

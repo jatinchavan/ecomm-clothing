@@ -13,7 +13,7 @@ import cartReducer from './redux/cart/cart.reducer';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import {PersistGate} from 'redux-persist/integration/react';
-import directoryReducer from './redux/directory/directory.reducer';
+import homepageReducer from './redux/homepage/homepage.reducer';
 import shopReducer from './redux/shop/shop.reducer';
 
 const persistConfig = {
@@ -21,7 +21,7 @@ const persistConfig = {
     storage,
     whitelist: ['cart']
 };
-const rootReducer = combineReducers({user: userReducer, cart: cartReducer, directory: directoryReducer, shop: shopReducer});
+const rootReducer = combineReducers({user: userReducer, cart: cartReducer, homepage: homepageReducer, shop: shopReducer});
 // persistedReducer - Root reducer with persistance capabilities
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
