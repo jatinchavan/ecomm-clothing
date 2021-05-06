@@ -32,25 +32,28 @@ const ContactPage = () => (
                 When I'm not coding or pushing pixels, you'll find me
                 <br/>
                 working out 🏋️‍♂️, at the beach 🏖 or hiking somewhere in the mountains 🏔.</p>
-            <p className='info-2'>You can get my resume <a href="https://drive.google.com/file/d/1_qmS8i0bbxl7SYFRygttC-2AMVNVSAuw/view" className='resume-link'> here.</a></p>
-            <hr />
+            <p className='info-2'>You can get my resume <a href="https://drive.google.com/drive/folders/1_bG7OtW4ybXAYwr4Bj3QD8qHp35WhoDC"
+                    className='resume-link'>
+                    here.</a>
+            </p>
+            <hr/>
             <p className='info-3'>Please feel free to contact me anytime.</p>
             <div className='contact-platforms'>
                 <a href="tel:+919272111491" className='icon'>
                     <CallLogo/>
-                </a>                
-                <a href='mailto:jatinchavan3010@gmail.com' className='icon'>
-                    <GmailLogo />
                 </a>
-                <a href='//www.facebook.com/jthrilled/' className='icon'>
+                <a href='mailto:jatinchavan3010@gmail.com' className='icon' target="_blank" rel="noreferrer"> 
+                    <GmailLogo/>
+                </a>
+                <a href='//www.facebook.com/jthrilled/' className='icon' target="_blank" rel="noreferrer">
                     <FacebookLogo/>
                 </a>
-                <a href='//www.linkedin.com/in/jatin-chavan-84391b120/' className='icon'>
+                <a href='//www.linkedin.com/in/jatin-chavan-84391b120/' className='icon' target="_blank" rel="noreferrer">
                     <LinkedinLogo/>
                 </a>
-                <a href='//www.github.com/jatinchavan/' className='icon'>
+                <a href='//www.github.com/jatinchavan/' className='icon' target="_blank" rel="noreferrer">
                     <GithubLogo/>
-                </a>                 
+                </a>
             </div>
         </div>
     </div>

@@ -13,6 +13,8 @@ import {UserActionTypes} from './redux/user/user.types';
 import Checkout from './pages/checkout/Checkout';
 import Collection from './pages/collection/Collection';
 import ContactPage from './pages/contact/Contact';
+import { SpinnerActionTypes } from './redux/spinner/spinner.types';
+import Spinner from './components/spinner/Spinner';
 
 class App extends Component {
 
@@ -38,6 +40,11 @@ class App extends Component {
                 this.props.setCurrentUser(userAuth);
             }
         });
+
+        // fake loading, since there is no dependency on server for loading data
+        setTimeout(() => {
+            this.props.stopSpinner();
+        }, 1000);
     }
 
     componentWillUnmount() {
@@ -47,17 +54,20 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Header/>
-                <Switch>
-                    <Route exact path="/" component={HomePage}/>
-                    <Route exact path='/shop' component={ ShopPage }/>
-                    <Route exact path='/signin' render={() => this.props.currentUser // 5
-                        ? (<Redirect to='/'/>)
-                        : (<SignInAndSignUp/>)}/>
-                    <Route exact path='/checkout' component={Checkout}/>
-                    <Route exact path='/contact' component={ContactPage}/>
-                    <Route path='/shop/:collectionId' component={Collection}/>
-                </Switch>
+            {this.props.loading ? <Spinner /> :
+                <div>
+                    <Header/>
+                    <Switch>
+                        <Route exact path="/" component={HomePage}/>
+                        <Route exact path='/shop' component={ ShopPage }/>
+                        <Route exact path='/signin' render={() => this.props.currentUser // 5
+                            ? (<Redirect to='/'/>)
+                            : (<SignInAndSignUp/>)}/>
+                        <Route exact path='/checkout' component={Checkout}/>
+                        <Route exact path='/contact' component={ContactPage}/>
+                        <Route path='/shop/:collectionId' component={Collection}/>
+                    </Switch>
+                </div>}
             </div>
         );
     }
@@ -65,7 +75,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     // 4
-    return {currentUser: state.user.currentUser}
+    return {currentUser: state.user.currentUser, loading: state.spinner.loading}
 }
 
 const mapDispatchToProps = dispatch => {
@@ -73,7 +83,8 @@ const mapDispatchToProps = dispatch => {
         // 2 (3 in user-reducer)
         setCurrentUser: user => {
             dispatch({type: UserActionTypes.SET_CURRENT_USER, payload: user})
-        }
+        },
+        stopSpinner: () => dispatch({type: SpinnerActionTypes.STOP_SPINNER})
     }
 }
 

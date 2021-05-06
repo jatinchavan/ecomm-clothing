@@ -15,13 +15,19 @@ import storage from 'redux-persist/lib/storage';
 import {PersistGate} from 'redux-persist/integration/react';
 import homepageReducer from './redux/homepage/homepage.reducer';
 import shopReducer from './redux/shop/shop.reducer';
+import spinnerReducer from './redux/spinner/spinner.reducer';
 
 const persistConfig = {
     key: 'root',
     storage,
     whitelist: ['cart']
 };
-const rootReducer = combineReducers({user: userReducer, cart: cartReducer, homepage: homepageReducer, shop: shopReducer});
+const rootReducer = combineReducers({
+    user: userReducer,
+    cart: cartReducer,
+    homepage: homepageReducer,
+    shop: shopReducer,
+    spinner: spinnerReducer });
 // persistedReducer - Root reducer with persistance capabilities
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

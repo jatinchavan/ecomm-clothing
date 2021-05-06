@@ -4,37 +4,33 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
-  
+
     .logo-container {
-      height: 100%;
-      width: 70px;
-      // padding: 25px;
+        height: 100%;
+        width: 70px;
 
-      img{
-        width: 100%
-      }
+        img {
+            width: 100%;
+        }
     }
 
-    
-  
     .options {
-      width: 25%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      color: #02695b;
-      font-weight: bold;
-      font-size: 17px;
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        color: #02695b;
+        font-weight: bold;
+        font-size: 17px;
 
-      &.active{
-        text-decoration: underline;
-      }
-  
-      .option {
-        padding: 10px 15px;
-        cursor: pointer;
-      }
+        &.active {
+            text-decoration: underline;
+        }
+
+        .option {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
     }
-  }
-  
+}
