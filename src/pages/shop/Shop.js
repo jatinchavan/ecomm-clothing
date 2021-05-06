@@ -6,7 +6,11 @@ import CollectionOverview from '../../components/collection-overview/CollectionO
 
 const ShopPage = ({collections}) => (
     <div className='shop-page'>
-        {collections.map((item) => (<CollectionOverview key={item.id} title={item.title} items={item.items}/>))}
+        {collections.map((item) => (<CollectionOverview
+            key={item.id}
+            title={item.title}
+            items={item.items}
+            routeName={item.routeName}/>))}
     </div>
 );
 

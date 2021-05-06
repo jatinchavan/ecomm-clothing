@@ -1,10 +1,10 @@
 import React from 'react';
 
 import './Header.styles.scss';
-import {ReactComponent as Logo} from '../../assets/crown.svg';
+import animatedLogo from '../../assets/ecomm-animated.gif'
 import {auth} from '../../firebase/firebase.utils';
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/Cart-icon';
 import CartDropDown from '../cart-dropdown/CartDropDown';
@@ -14,17 +14,17 @@ import { selectCurrentUser } from '../../redux/user/user.selector';
 //{currentUser} = props.currentUser
 const Header = ({currentUser, HiddenMiniCart}) => (
     <div className='header'>
-        <Link to="/" className='logo-container'>
-            <Logo className='logo'/>
-        </Link>
+        <NavLink to="/" className='logo-container'>
+            <img src={animatedLogo} alt='logo'/>
+        </NavLink>
         <div className='options'>
-            <Link className='options' to='/shop'> SHOP </Link>
-            <Link className='options' to='/contact'> CONTACT </Link>
+            <NavLink className='options' to='/shop'> SHOP </NavLink>
+            <NavLink className='options' to='/contact'> CONTACT </NavLink>
             {
                 currentUser ? // show based on if user is loggd in or not. 
                 <div className='options' onClick={() => auth.signOut()}> SIGN OUT </div>
                 : 
-                <Link className='options' to='/signin'> SIGN IN </Link>
+                <NavLink className='options' to='/signin'> SIGN IN </NavLink>
             }
             <CartIcon />
         </div>

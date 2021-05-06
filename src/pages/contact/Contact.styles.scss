@@ -1,0 +1,76 @@
+.contactPage {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border: 1px solid #02695b;
+    padding: 25px;
+    margin-top: 40px;
+
+    .profile-picture {
+        width: 30%;
+        height: 100%;
+    }
+
+    .about-me {
+        margin-left: 20px;
+        width: 500px;
+
+        h1 {
+            line-height: 1.2em;
+            font-family: "neosans regular", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+            letter-spacing: -0.07em;
+            color: #111111;
+            text-rendering: optimizelegibility;
+            font-weight: normal;
+            font-size: 5rem;
+            margin: 5px 0;
+        }
+
+        .info {
+            font-size: 1.5rem;
+            color: #666666;
+            line-height: 1.4em;
+            margin-bottom: 0.7em;
+            margin-top: 0;
+        }
+
+        .info-2 {
+            font-family: "proxima nova light", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+            text-rendering: optimizeLegibility;
+            display: list-item;
+            margin-left: 20px;
+        }
+
+        .info-3{
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .resume-link {
+            color: #e66464;
+        }
+
+        .contact-platforms {
+            display: flex;
+        }
+
+        .social-platform {
+            width: 20%;
+        }
+
+        .contact-platforms {
+            .icon {
+                display: contents;
+            }
+
+            svg {
+                width: 6%;
+                margin: 0 10px;
+            }
+        }
+
+        hr {
+            margin: 8px 0;
+        }
+    }
+}

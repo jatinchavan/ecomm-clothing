@@ -8,8 +8,14 @@
     .logo-container {
       height: 100%;
       width: 70px;
-      padding: 25px;
+      // padding: 25px;
+
+      img{
+        width: 100%
+      }
     }
+
+    
   
     .options {
       width: 25%;
@@ -17,6 +23,13 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      color: #02695b;
+      font-weight: bold;
+      font-size: 17px;
+
+      &.active{
+        text-decoration: underline;
+      }
   
       .option {
         padding: 10px 15px;

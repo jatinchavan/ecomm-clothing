@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 import {UserActionTypes} from './redux/user/user.types';
 import Checkout from './pages/checkout/Checkout';
 import Collection from './pages/collection/Collection';
+import ContactPage from './pages/contact/Contact';
 
 class App extends Component {
 
@@ -54,6 +55,7 @@ class App extends Component {
                         ? (<Redirect to='/'/>)
                         : (<SignInAndSignUp/>)}/>
                     <Route exact path='/checkout' component={Checkout}/>
+                    <Route exact path='/contact' component={ContactPage}/>
                     <Route path='/shop/:collectionId' component={Collection}/>
                 </Switch>
             </div>
