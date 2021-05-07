@@ -63,7 +63,7 @@ class SignUp extends Component {
                             name='displayName'
                             value={this.state.displayName}
                             onChange={this.handleChange}
-                            label='Display Name'
+                            label='Name'
                             required/>
                         <FormInput
                             type='email'
@@ -84,7 +84,7 @@ class SignUp extends Component {
                             name='confirmPassword'
                             value={this.state.confirmPassword}
                             onChange={this.handleChange}
-                            label='Password'
+                            label=' Confirm Password'
                             required/>
                         <CustomButton type='submit'>Sign Up</CustomButton>
                     </form>
